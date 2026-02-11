@@ -1,0 +1,8 @@
+--- Registered Users ---
+Name: 'Admin Aurora', Email: admin@purplepulse.dev, Role: admin, ID: 6986dda97283dc318a9c3fa0
+Name: 'Lead Lyra', Email: lead@purplepulse.dev, Role: lead, ID: 6986dda97283dc318a9c3fa2
+Name: 'User Orion', Email: user@purplepulse.dev, Role: user, ID: 6986ddaa7283dc318a9c3fa4
+Name: 'Test Lead', Email: lead_test_1770446931776@example.com, Role: lead, ID: 6986e0532dbcaf78723ee28a
+Name: 'Thulasimani D', Email: thulasimanid.cb23@bitsathy.ac.in, Role: user, ID: 69871480e94d0a8795679071
+Name: 'Mohana', Email: mohana@gmail.com, Role: admin, ID: 698714d4e94d0a87956790a9
+------------------------

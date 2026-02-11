@@ -1,0 +1,8 @@
+Connected to DB
+Found Lead: Test Lead (6986e0532dbcaf78723ee28a)
+Found Target: User Orion (6986ddaa7283dc318a9c3fa4)
+Attempting to find user with regex: ^User Orion$
+SUCCESS: User found by name via Regex.
+ID Match verified.
+Testing with trailing space: 'User Orion '
+Result after trim: Found
