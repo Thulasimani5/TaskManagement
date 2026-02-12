@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [token, setToken] = useState(() => localStorage.getItem("pp_token"));
   const [loading, setLoading] = useState(false);
+  console.log("AuthContext: user", user, "token", !!token);
 
   useEffect(() => {
     if (!token) return;

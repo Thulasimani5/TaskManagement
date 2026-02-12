@@ -35,8 +35,8 @@ const Reports = () => {
     const fetchReports = async () => {
       try {
         const [dailyRes, weeklyRes] = await Promise.all([
-          api.get("/reports/daily"),
-          api.get("/reports/weekly")
+          api.get("/reports/daily?scope=personal"),
+          api.get("/reports/weekly?scope=personal")
         ]);
         setDaily(dailyRes.data);
         setWeekly(weeklyRes.data);

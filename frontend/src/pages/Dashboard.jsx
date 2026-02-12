@@ -8,12 +8,13 @@ const Dashboard = () => {
   const [summary, setSummary] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log("Dashboard: rendering, loading:", loading);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [weeklyRes, tasksRes] = await Promise.all([
-          api.get("/reports/weekly"),
+          api.get("/reports/weekly?scope=personal"),
           api.get("/tasks")
         ]);
         setSummary(weeklyRes.data);

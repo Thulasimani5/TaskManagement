@@ -52,8 +52,9 @@ export const getDailySummary = async (req, res) => {
     const since = new Date();
     since.setDate(since.getDate() - 1);
 
-    // Check if user role is 'user' to filter by assignedTo
-    const userId = req.user.role === 'user' ? req.user._id : null;
+    // Check if user role is 'user' OR if scope is explicitly 'personal'
+    const isPersonal = req.query.scope === 'personal';
+    const userId = (req.user.role === 'user' || isPersonal) ? req.user._id : null;
 
     const result = await Task.aggregate(getReportPipeline(since, userId));
     const summary = processAggregationResult(result);
@@ -71,7 +72,8 @@ export const getWeeklySummary = async (req, res) => {
     const since = new Date();
     since.setDate(since.getDate() - 7);
 
-    const userId = req.user.role === 'user' ? req.user._id : null;
+    const isPersonal = req.query.scope === 'personal';
+    const userId = (req.user.role === 'user' || isPersonal) ? req.user._id : null;
 
     const result = await Task.aggregate(getReportPipeline(since, userId));
     const summary = processAggregationResult(result);
