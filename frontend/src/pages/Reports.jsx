@@ -12,6 +12,7 @@ import {
   CartesianGrid
 } from "recharts";
 import { api } from "../services/api.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const STATUS_COLORS = {
   todo: "#9B5DE5",
@@ -27,6 +28,7 @@ const PRIORITY_COLORS = {
 };
 
 const Reports = () => {
+  const { user } = useAuth();
   const [daily, setDaily] = useState(null);
   const [weekly, setWeekly] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -86,7 +88,7 @@ const Reports = () => {
     <div className="pp-reports">
       <div className="pp-section-header">
         <div>
-          <h2>Progress Pulse</h2>
+          <h2>{user?.name}'s Progress Pulse</h2>
           <p>Visual analytics across your recent task constellations.</p>
         </div>
       </div>

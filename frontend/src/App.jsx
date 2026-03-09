@@ -8,6 +8,10 @@ import Dashboard from "./pages/Dashboard.jsx";
 import TaskBoard from "./pages/TaskBoard.jsx";
 import Reports from "./pages/Reports.jsx";
 import TeamDirectory from "./pages/TeamDirectory.jsx";
+import Leaderboard from "./pages/Leaderboard.jsx";
+
+
+
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import { SearchProvider } from "./context/SearchContext.jsx";
@@ -39,6 +43,10 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tasks" element={<TaskBoard />} />
             <Route path="/team" element={<TeamDirectory />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+
+
+
             <Route path="/reports" element={<Reports />} />
           </Route>
         </Route>

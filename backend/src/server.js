@@ -7,6 +7,8 @@ import authRoutes from "./routes/authRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import leaderboardRoutes from "./routes/leaderboardRoutes.js";
+
 
 dotenv.config();
 
@@ -51,6 +53,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/leaderboard", leaderboardRoutes);
+
 
 // Global error handler (graceful errors)
 // eslint-disable-next-line no-unused-vars

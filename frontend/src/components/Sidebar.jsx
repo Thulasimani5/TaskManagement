@@ -34,6 +34,17 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
+          to="/leaderboard"
+          className={({ isActive }) =>
+            `pp-nav-link ${isActive ? "active" : ""}`
+          }
+        >
+          <span className="pp-nav-dot" />
+          Leaderboard
+        </NavLink>
+
+
+        <NavLink
           to="/reports"
           className={({ isActive }) =>
             `pp-nav-link ${isActive ? "active" : ""}`

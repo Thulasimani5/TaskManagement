@@ -3,7 +3,10 @@ import { Task } from "../models/Task.js";
 // Helper to build aggregation pipeline
 const getReportPipeline = (since, userId) => {
   const matchStage = {
-    updatedAt: { $gte: since }
+    $or: [
+      { updatedAt: { $gte: since } },
+      { status: { $ne: "completed" } }
+    ]
   };
 
   if (userId) {

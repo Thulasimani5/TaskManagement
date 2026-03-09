@@ -72,9 +72,6 @@ const TeamList = () => {
 
     return (
         <div className="pp-team-container">
-            <div className="pp-team-header">
-                <h3>Team Directory</h3>
-            </div>
 
             <TeamGroup title="Conductors (Leads & Admins)" groupUsers={leads} />
             <TeamGroup title="Mission Specialists" groupUsers={members} />
