@@ -89,26 +89,13 @@ const Dashboard = () => {
           <h2>Dashboard Overview</h2>
           <p>Welcome, {user?.name}</p>
         </div>
-        <div className="pp-quick-stats">
-          <div className="pp-mini-stat animate-pop-in" style={{ animationDelay: '0.1s' }}>
-            <span className="pp-stat-dot todo" />
-            <span>{summary?.byStatus?.todo || 0} To Do</span>
-          </div>
-          <div className="pp-mini-stat animate-pop-in" style={{ animationDelay: '0.2s' }}>
-            <span className="pp-stat-dot progress" />
-            <span>{summary?.byStatus?.in_progress || 0} In Progress</span>
-          </div>
-          <div className="pp-mini-stat animate-pop-in" style={{ animationDelay: '0.3s' }}>
-            <span className="pp-stat-dot done" />
-            <span>{summary?.byStatus?.completed || 0} Completed</span>
-          </div>
-        </div>
+
       </header>
 
       {/* Tier 1: Tactical Metrics */}
       <div className="pp-tier pp-top-row">
         {[
-          { label: "Total Tasks", value: summary?.total || 0, type: 'spark', data: activityData },
+          { label: "Total Tasks", value: summary?.total || 0, type: 'text', sub: 'All Tasks' },
           { label: "Completion Rate", value: `${summary?.completionRate || 0}%`, type: 'progress', percent: summary?.completionRate },
           { label: "Pending Tasks", value: pendingCount, type: 'text', sub: 'Active' },
           { label: "Due Soon", value: dueSoon.length, type: 'text', sub: 'Next 24 Hours', alert: dueSoon.length > 0 }
@@ -175,7 +162,7 @@ const Dashboard = () => {
             <ResponsiveContainer width="100%" height={160}>
               <AreaChart data={activityData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.02)" />
-                <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.3)' }} />
+                <XAxis dataKey="day" axisLine={false} tickLine={false} tickMargin={12} tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.3)' }} />
                 <YAxis hide />
                 <RechartsTooltip contentStyle={{ background: 'rgba(5, 0, 22, 0.9)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px' }} />
                 <Area type="monotone" dataKey="updates" stroke="#00F5D4" fill="rgba(0, 245, 212, 0.05)" strokeWidth={2} />
@@ -189,8 +176,7 @@ const Dashboard = () => {
       <div className="pp-tier pp-bottom-row">
         {[
           { title: "Upcoming Deadlines", type: 'list', items: dueSoon.slice(0, 4), empty: "No tasks due soon." },
-          { title: "Recent Activity", type: 'log', items: recentActivity, empty: "No recent activity." },
-          { title: "System Status", type: 'diag' }
+          { title: "Recent Activity", type: 'log', items: recentActivity, empty: "No recent activity." }
         ].map((tier, i) => (
           <div key={i} className="pp-card-mixed-refined glassy-surface-premium animate-slide-up" style={{ animationDelay: `${1.1 + (i * 0.1)}s` }}>
             <div className="pp-viz-header">
@@ -217,25 +203,17 @@ const Dashboard = () => {
                   <ul className="pp-tactical-list-refined">
                     {tier.items.map(t => (
                       <li key={t._id} className="pp-tactical-item-refined">
-                        <span className="status-dot-blink" style={{ backgroundColor: t.status === 'completed' ? '#00F5D4' : '#F15BB5' }} />
+                        <span className="status-dot-blink" style={{ backgroundColor: t.status === 'completed' ? '#00F5D4' : (t.status === 'in_progress' ? '#F15BB5' : '#9B5DE5') }} />
                         <div className="info">
                           <span className="title">{t.title}</span>
-                          <span className="meta status">{t.status.replace('_', ' ')}</span>
+                          <span className={`status-badge status-badge-${t.status.replace('_', '-')}`}>
+                            {t.status.replace('_', ' ')}
+                          </span>
                         </div>
                       </li>
                     ))}
                   </ul>
                 )
-              )}
-              {tier.type === 'diag' && (
-                <div className="pp-diagnostics-refined">
-                  {['API Server', 'Database', 'Connection'].map((diag, idx) => (
-                    <div key={idx} className="diag-item-refined">
-                      <span className="label">{diag}</span>
-                      <span className="status nom-glow">Online</span>
-                    </div>
-                  ))}
-                </div>
               )}
             </div>
           </div>

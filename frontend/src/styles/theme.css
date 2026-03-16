@@ -1,25 +1,27 @@
-/* Light Theme (Default) */
+/* Light Theme (Default) - Enhanced Contrast & Color Theory */
 [data-theme="light"] {
-  --pp-bg: #f8f9fa;
+  --pp-bg: #f5f7fa;
   --pp-bg-elevated: #ffffff;
   --pp-bg-card: #ffffff;
-  --pp-border-subtle: rgba(106, 13, 173, 0.1);
+  --pp-bg-glass: rgba(255, 255, 255, 0.7);
+  --pp-border-subtle: rgba(106, 13, 173, 0.08);
 
-  --pp-primary: #6a0dad;
-  --pp-primary-soft: #9b5de5;
-  --pp-primary-gradient: linear-gradient(135deg, #6a0dad, #9b5de5);
-  --pp-accent-pink: #f15bb5;
-  --pp-accent-cyan: #00b4d8;
+  --pp-primary: #5a0994; /* Deepened for better contrast */
+  --pp-primary-soft: #8a4ed6;
+  --pp-primary-gradient: linear-gradient(135deg, #5a0994, #8a4ed6);
+  --pp-accent-pink: #d61c8a; /* Deepened */
+  --pp-accent-cyan: #0087a3; /* Deepened for legibility */
 
-  --pp-text-main: #2d0046;
-  --pp-text-muted: #6c587c;
+  --pp-text-main: #1a0033; /* Darker for crispness */
+  --pp-text-muted: #5c4d6d;
+  --pp-text-contrast-white: #1a0033; /* Becomes dark text in light mode */
 
-  --pp-radius-lg: 20px;
-  --pp-radius-md: 14px;
+  --pp-radius-lg: 24px;
+  --pp-radius-md: 16px;
   --pp-radius-pill: 999px;
 
-  --pp-shadow-soft: 0 4px 20px rgba(106, 13, 173, 0.08);
-  --pp-shadow-glow: 0 0 15px rgba(155, 93, 229, 0.2);
+  --pp-shadow-soft: 0 10px 30px rgba(106, 13, 173, 0.05);
+  --pp-shadow-glow: 0 0 20px rgba(155, 93, 229, 0.15);
 }
 
 /* Dark Theme */

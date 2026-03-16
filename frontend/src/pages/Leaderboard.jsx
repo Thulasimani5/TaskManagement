@@ -95,7 +95,7 @@ const RankingSection = ({ title, data, maxScore, delayOffset = 0 }) => {
                     </div>
                   </div>
                 </div>
-                <span className="row-completed">{player?.completedTasks || 0}</span>
+                <span className="row-completed"></span>
                 <span className="row-score">{player?.productivityScore || 0}</span>
                 <span className="row-streak">
                   <FiTrendingUp /> {player?.streak || 0}
