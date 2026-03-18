@@ -1,0 +1,13 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build": "npm install --workspace=frontend && npm run build --workspace=frontend && npm install --workspace=backend",
+    "start": "npm start --workspace=backend"
+  }
+}

@@ -1,4 +1,6 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
@@ -12,6 +14,7 @@ import leaderboardRoutes from "./routes/leaderboardRoutes.js";
 
 dotenv.config();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 // Basic middlewares
@@ -54,6 +57,16 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/leaderboard", leaderboardRoutes);
+
+
+// Serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../../frontend", "dist", "index.html"));
+  });
+}
 
 
 // Global error handler (graceful errors)
