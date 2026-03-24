@@ -4,13 +4,12 @@ import { fileURLToPath } from "url";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
-import authRoutes from "./routes/authRoutes.js";
-import taskRoutes from "./routes/taskRoutes.js";
-import reportRoutes from "./routes/reportRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import leaderboardRoutes from "./routes/leaderboardRoutes.js";
-
+import { connectDB } from "../src/config/db.js";
+import authRoutes from "../src/routes/authRoutes.js";
+import taskRoutes from "../src/routes/taskRoutes.js";
+import reportRoutes from "../src/routes/reportRoutes.js";
+import userRoutes from "../src/routes/userRoutes.js";
+import leaderboardRoutes from "../src/routes/leaderboardRoutes.js";
 
 dotenv.config();
 
@@ -71,12 +70,3 @@ await connectDB();
 
 // Export for Vercel
 export default app;
-
-// Local development listener
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`PurplePulse backend running on port ${PORT}`);
-  });
-}
-
