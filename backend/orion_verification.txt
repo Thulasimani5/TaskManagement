@@ -1,7 +1,0 @@
---- ORION REPORT VERIFICATION ---
-Total Count in Pulse: 4 (Expected: 4)
-By Status: {"todo":2,"in_progress":1,"completed":1}
-Specifically:
-- Todo: 2 (Expected: 2)
-- In Progress: 1 (Expected: 1)
-- Completed: 1 (Expected: 1)

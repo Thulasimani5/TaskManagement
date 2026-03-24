@@ -58,19 +58,7 @@ app.use("/api/reports", reportRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/leaderboard", leaderboardRoutes);
 
-
-// Serve static assets in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../../frontend/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../../frontend", "dist", "index.html"));
-  });
-}
-
-
-// Global error handler (graceful errors)
-// eslint-disable-next-line no-unused-vars
+// Global error handler
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res
@@ -78,16 +66,17 @@ app.use((err, req, res, next) => {
     .json({ message: err.message || "Unexpected server error." });
 });
 
-const PORT = process.env.PORT || 5000;
+// Connect to Database
+await connectDB();
 
-const startServer = async () => {
-  await connectDB();
+// Export for Vercel
+export default app;
+
+// Local development listener
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`PurplePulse backend running on port ${PORT}`);
   });
-};
-
-startServer().catch((err) => {
-  console.error("Failed to start server:", err);
-});
+}
 

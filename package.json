@@ -7,7 +7,7 @@
     "backend"
   ],
   "scripts": {
-    "build": "npm install --workspace=frontend && npm run build --workspace=frontend && npm install --workspace=backend",
-    "start": "npm start --workspace=backend"
+    "build": "npm install && npm run build --workspace=purplepulse-frontend",
+    "start": "npm start --workspace=purplepulse-backend"
   }
 }
