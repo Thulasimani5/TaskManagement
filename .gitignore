@@ -1,27 +1,33 @@
 # Dependencies
 node_modules/
-
-# Build output
-dist/
-dist-ssr/
+backend/node_modules/
+frontend/node_modules/
 
 # Environment files
 .env
-.env.local
-.env.production
-.env.*.local
+backend/.env
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
 
 # Logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Editor
-.vscode/
-.idea/
+# Build output
+frontend/dist/
+/pnpm-lock.yaml
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Debug/temp files
+# Debug / scratch output files
 *.txt
+backend/list_users.js
+backend/verify_*.js
+frontend/verify_*.js
+
+# OS / Editor
+.DS_Store
+.vscode/

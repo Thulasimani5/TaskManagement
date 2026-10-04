@@ -20,7 +20,6 @@ const RankingSection = ({ title, data, maxScore, delayOffset = 0 }) => {
     <div className="pp-ranking-sector">
       <h3 className="pp-sector-title">{title}</h3>
       
-      {/* Top 3 Podium */}
       <div className="pp-podium">
         {top3.map((player, index) => (
           <div 
@@ -66,7 +65,6 @@ const RankingSection = ({ title, data, maxScore, delayOffset = 0 }) => {
         ))}
       </div>
 
-      {/* Remaining Rankings */}
       {rest.length > 0 && (
         <div className="pp-leaderboard-list">
           <div className="pp-list-header">
@@ -120,7 +118,6 @@ const Leaderboard = () => {
       setLoading(true);
       try {
         const res = await api.get(`/leaderboard?timeframe=${timeframe}`);
-        // Handle both single array and object response for backward compatibility or direct access
         if (Array.isArray(res.data)) {
           setData({ users: res.data, leads: [] });
         } else {

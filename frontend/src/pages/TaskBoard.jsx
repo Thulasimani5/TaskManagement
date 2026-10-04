@@ -24,7 +24,7 @@ const TaskBoard = () => {
   const [creating, setCreating] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [viewMode, setViewMode] = useState("my_missions"); // 'my_missions' | 'team_missions'
+  const [viewMode, setViewMode] = useState("my_missions");
 
   const [form, setForm] = useState({
     title: "",
@@ -60,7 +60,7 @@ const TaskBoard = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, [viewMode]); // Refetch when viewMode changes
+  }, [viewMode]);
 
   const filteredTasks = useMemo(() => {
     if (!searchQuery) return tasks;
@@ -103,7 +103,7 @@ const TaskBoard = () => {
       status: "todo",
       deadline: "",
       deadline: "",
-      assignedToName: "" // Default to empty for manual entry
+      assignedToName: ""
     });
     setError("");
     setCreating(true);
@@ -118,7 +118,6 @@ const TaskBoard = () => {
     setSaving(true);
     setError("");
     try {
-      // If no name provided, default to current user
       const payload = { ...form };
       if (!payload.assignedToName) {
         payload.assignedTo = user._id;

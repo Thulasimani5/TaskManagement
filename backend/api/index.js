@@ -1,58 +1,16 @@
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import cors from "cors";
-import morgan from "morgan";
-import dotenv from "dotenv";
-import { connectDB } from "../src/config/db.js";
-import authRoutes from "../src/routes/authRoutes.js";
-import taskRoutes from "../src/routes/taskRoutes.js";
-import reportRoutes from "../src/routes/reportRoutes.js";
-import userRoutes from "../src/routes/userRoutes.js";
-import leaderboardRoutes from "../src/routes/leaderboardRoutes.js";
+// api/index.js — Vercel serverless entry point
+// Delegates to the shared app factory so there is zero duplication.
 
+import dotenv from "dotenv";
 dotenv.config();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const app = express();
+import createApp from "../src/app.js";
+import { connectDB } from "../src/config/db.js";
 
-// Basic middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Connect once (Vercel may reuse the same lambda instance across requests)
+connectDB().catch((err) => console.error("DB connection failed:", err));
 
-app.use(
-  cors({
-    origin: true, // This automatically allows whichever frontend URL is calling it
-    credentials: true
-  })
-);
+const app = createApp();
 
-if (process.env.NODE_ENV !== "production") {
-  app.use(morgan("dev"));
-}
-
-// Health check
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", app: "PurplePulse Backend" });
-});
-
-// Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/tasks", taskRoutes);
-app.use("/api/reports", reportRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/leaderboard", leaderboardRoutes);
-
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error("Unhandled error:", err);
-  res
-    .status(err.status || 500)
-    .json({ message: err.message || "Unexpected server error." });
-});
-
-// Connect to Database
-await connectDB();
-
-// Export for Vercel
 export default app;
+

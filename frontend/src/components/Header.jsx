@@ -25,13 +25,11 @@ const Header = () => {
       };
       fetchNotifications();
 
-      // Poll every 5 minutes
       const interval = setInterval(fetchNotifications, 300000);
       return () => clearInterval(interval);
     }
   }, [user]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

@@ -10,8 +10,6 @@ export const AuthProvider = ({ children }) => {
   });
   const [token, setToken] = useState(() => localStorage.getItem("pp_token"));
   const [loading, setLoading] = useState(false);
-  console.log("AuthContext: user", user, "token", !!token);
-
   useEffect(() => {
     if (!token) return;
     api
@@ -21,7 +19,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("pp_user", JSON.stringify(res.data.user));
       })
       .catch(() => {
-        // If token invalid, clear it
         setUser(null);
         setToken(null);
         localStorage.removeItem("pp_user");
