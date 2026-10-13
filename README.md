@@ -2,7 +2,7 @@
 
 > A futuristic, full-stack digital task monitoring and gamified workflow optimization ecosystem governed by strict Role-Based Access Control (RBAC), multi-tier review pipelines, and an esports-style 3D leaderboard scoring engine.
 
-[Live Demo](https://purplepulse.dev) · [GitHub](https://github.com/Thulasimani5/PurplePulse) · [API Docs](#api-documentation) · [Demo Video](https://youtube.com)
+[Live Demo](https://purplepulse.dev) · [GitHub](https://github.com/Thulasimani5/PurplePulse) · [API Docs](#api-documentation)
 
 ---
 
@@ -41,15 +41,7 @@ Traditional task management approaches suffer from fragmented communication, opa
 ## Screenshots / Demo
 
 ```
-+-----------------------------------------------------------------------------------+
-|                                 PURPLEPULSE STAGE                                 |
-|                                                                                   |
-|                 👑 2nd                    👑 1st                    👑 3rd         |
-|              [Coral Pink]             [Neon Magenta]            [Golden Amber]    |
-|                Pillar                     Pillar                    Pillar        |
-|                                                                                   |
-|  [ You achieved success today and are ranked #1 out of 22 voyagers • 140 PTS ]   |
-+-----------------------------------------------------------------------------------+
+
 ```
 
 ---
@@ -89,30 +81,96 @@ Traditional task management approaches suffer from fragmented communication, opa
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       REACT FRONTEND                        │
-│   (Vite • React Router • AuthContext • 3D Design System)    │
-└──────────────────────────────┬──────────────────────────────┘
-                               │  HTTPS / REST JSON
-                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    EXPRESS BACKEND (API)                    │
-│   ┌─────────────────────────────────────────────────────┐   │
-│   │                 Auth & Role Middleware              │   │
-│   └──────────────────────────┬──────────────────────────┘   │
-│                              ▼                              │
-│   ┌─────────────────────────────────────────────────────┐   │
-│   │  Controllers -> Services -> Repository Layer        │   │
-│   │  (Auth • Tasks • Leaderboard • Reports • Users)     │   │
-│   └──────────────────────────┬──────────────────────────┘   │
-└──────────────────────────────┼──────────────────────────────┘
-                               │  Mongoose ODM
-                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    MONGODB ATLAS DATABASE                   │
-│         [Users Collection]     [Tasks Collection]           │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+
+    USER(["Users<br/>Admin • Lead / Manager • Employee"])
+
+    subgraph FRONTEND["1. PRESENTATION LAYER — React 18 + Vite"]
+        direction LR
+        UI["User Interface<br/>Dashboard • Task Board<br/>Reviews • Leaderboard"]
+        AUTH_UI["Authentication<br/>Login • Register"]
+        STATE["Context & Client State<br/>AuthContext • ThemeContext"]
+        API["Axios API Client<br/>JWT Token • Request / Response Handling"]
+
+        UI --> STATE
+        AUTH_UI --> STATE
+        STATE --> API
+    end
+
+    subgraph API_LAYER["2. API & SECURITY LAYER — Node.js + Express.js"]
+        direction LR
+        CORS["CORS Middleware"]
+        ROUTER["REST API Routes"]
+        JWT["JWT Authentication<br/>Token Verification"]
+        RBAC["Role-Based Access Control<br/>Admin • Lead • Employee"]
+        ERROR["Validation &<br/>Global Error Handler"]
+
+        CORS --> ROUTER --> JWT --> RBAC
+        RBAC --> ERROR
+    end
+
+    subgraph BUSINESS["3. APPLICATION & BUSINESS LOGIC LAYER"]
+        direction TB
+
+        AUTH["Authentication Module<br/>Registration • Login<br/>Password Hashing"]
+        TASK["Task Management Module<br/>Create • Assign • Update<br/>Priority • Deadlines"]
+        WORKFLOW["Workflow & Review Engine<br/>Status Transitions<br/>Approval • Revision • Self-Task Bypass"]
+        SCORE["Productivity & Leaderboard Engine<br/>Priority Points • Deadline Adherence<br/>Revision Penalties • On-Time Streaks"]
+        REPORT["Analytics & Reporting Module<br/>Completion Rates • Team Productivity<br/>Daily / Weekly Summaries"]
+
+        TASK --> WORKFLOW
+        WORKFLOW --> SCORE
+        SCORE --> REPORT
+    end
+
+    subgraph DATA["4. DATA PERSISTENCE LAYER"]
+        direction LR
+        ODM["Mongoose ODM<br/>Models • Schema Validation"]
+        USERS[("Users Collection<br/>Profiles • Roles • Password Hashes")]
+        TASKS[("Tasks Collection<br/>Assignments • Deadlines • Status")]
+        HISTORY[("Embedded Task History<br/>Reviews • Feedback • Status Changes")]
+
+        ODM <--> USERS
+        ODM <--> TASKS
+        TASKS --- HISTORY
+    end
+
+    USER --> UI
+    API <-->|HTTPS / REST JSON| CORS
+    ERROR --> AUTH
+    ERROR --> TASK
+    ERROR --> SCORE
+    ERROR --> REPORT
+
+    AUTH <--> ODM
+    TASK <--> ODM
+    WORKFLOW <--> ODM
+    SCORE <--> ODM
+    REPORT <--> ODM
+
+    subgraph FUTURE["FUTURE ENHANCEMENTS — Planned"]
+        direction LR
+        AI["AI-Driven Task Allocation"]
+        PREDICT["Predictive Delay Analytics"]
+        MOBILE["React Native Mobile App<br/>Push Notifications"]
+    end
+
+    SCORE -. "Historical performance data" .-> AI
+    TASK -. "Task history & progress" .-> PREDICT
+    API -. "Mobile API integration" .-> MOBILE
+
+    classDef frontend fill:#EDE9FE,stroke:#7C3AED,color:#312E81,stroke-width:1.5px
+    classDef security fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A,stroke-width:1.5px
+    classDef business fill:#FCE7F3,stroke:#DB2777,color:#831843,stroke-width:1.5px
+    classDef database fill:#D1FAE5,stroke:#059669,color:#064E3B,stroke-width:1.5px
+    classDef future fill:#FFF7ED,stroke:#EA580C,color:#9A3412,stroke-width:1.5px,stroke-dasharray:5 5
+
+    class UI,AUTH_UI,STATE,API frontend
+    class CORS,ROUTER,JWT,RBAC,ERROR security
+    class AUTH,TASK,WORKFLOW,SCORE,REPORT business
+    class ODM,USERS,TASKS,HISTORY database
+    class AI,PREDICT,MOBILE future
 ```
 
 ### Explanation of Components & Data Flow:
@@ -327,7 +385,7 @@ npm test
 ## License
 
 ```text
-Copyright (c) 2026 [ Thulasimani ]. All rights reserved.
+Copyright (c) 2026 [ PurplePulse ]. All rights reserved.
 
 This source code is made available for viewing and inspection purposes only.
 
