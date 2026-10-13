@@ -16,6 +16,7 @@
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
   min-height: 90vh;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 /* Volumetric Atmospheric Spotlights */
@@ -101,6 +102,34 @@
   flex-wrap: wrap;
 }
 
+/* Stage Theme Quick Toggle Button */
+.pp-stage-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(155, 93, 229, 0.18);
+  border: 1px solid rgba(155, 93, 229, 0.4);
+  border-radius: 20px;
+  color: #c4b5fd;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.pp-stage-theme-btn:hover {
+  background: rgba(155, 93, 229, 0.3);
+  color: #ffffff;
+  border-color: #00f5d4;
+  box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+}
+
+.pp-formula-info-icon {
+  color: #00f5d4;
+}
+
 /* Formula Rule Trigger Button */
 .pp-formula-trigger-btn {
   display: inline-flex;
@@ -177,6 +206,16 @@
 @keyframes pp-hud-slide-down {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.pp-formula-hud-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #00f5d4;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
 .pp-formula-hud-grid {
@@ -678,6 +717,18 @@
   font-weight: 600;
 }
 
+.pp-missions-done {
+  color: #10b981;
+}
+
+.pp-missions-divider {
+  opacity: 0.4;
+}
+
+.pp-missions-active {
+  color: #00f5d4;
+}
+
 .pp-row-revisions-cell {
   font-size: 12px;
   font-weight: 700;
@@ -755,4 +806,293 @@
   .pp-table-cols-head span:nth-child(5) {
     display: none;
   }
+}
+
+/* ==========================================================================
+   WHITE THEME (LIGHT MODE) STYLES FOR LEADERBOARD UI
+   ========================================================================== */
+
+/* Main Stage Canvas */
+[data-theme="light"] .pp-stage-leaderboard {
+  color: #1a0033;
+  background: radial-gradient(circle at 50% 12%, #ffffff 0%, #f9f5ff 45%, #f1e9fc 100%);
+  border: 1px solid rgba(106, 13, 173, 0.12);
+  box-shadow: 0 15px 45px rgba(106, 13, 173, 0.08), 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+/* Volumetric Atmospheric Spotlights in White Theme */
+[data-theme="light"] .pp-spotlight-beam-center {
+  background: conic-gradient(from 180deg at 50% 0%, rgba(192, 132, 252, 0.22) 0deg, rgba(192, 132, 252, 0) 45deg, rgba(192, 132, 252, 0) 315deg, rgba(192, 132, 252, 0.22) 360deg);
+  filter: blur(55px);
+  opacity: 0.7;
+}
+
+[data-theme="light"] .pp-spotlight-beam-left {
+  background: conic-gradient(from 170deg at 50% 0%, rgba(251, 113, 133, 0.18) 0deg, rgba(251, 113, 133, 0) 40deg, rgba(251, 113, 133, 0) 320deg, rgba(251, 113, 133, 0.18) 360deg);
+  filter: blur(55px);
+  opacity: 0.65;
+}
+
+[data-theme="light"] .pp-spotlight-beam-right {
+  background: conic-gradient(from 190deg at 50% 0%, rgba(251, 191, 36, 0.18) 0deg, rgba(251, 191, 36, 0) 40deg, rgba(251, 191, 36, 0) 320deg, rgba(251, 191, 36, 0.18) 360deg);
+  filter: blur(55px);
+  opacity: 0.65;
+}
+
+/* Stage Header */
+[data-theme="light"] .pp-stage-title-wrap h1 {
+  color: #1a0033;
+}
+
+[data-theme="light"] .pp-stage-title-wrap p {
+  color: #5c4d6d;
+}
+
+/* Stage Theme Switcher Button */
+[data-theme="light"] .pp-stage-theme-btn {
+  background: #ffffff;
+  border: 1px solid rgba(106, 13, 173, 0.2);
+  color: #5a0994;
+  box-shadow: 0 2px 8px rgba(106, 13, 173, 0.05);
+}
+
+[data-theme="light"] .pp-stage-theme-btn:hover {
+  background: #f7f2fe;
+  border-color: #7c3aed;
+  color: #3b0764;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.15);
+}
+
+/* Formula Trigger Button */
+[data-theme="light"] .pp-formula-trigger-btn {
+  background: #ffffff;
+  border: 1px solid rgba(106, 13, 173, 0.2);
+  color: #5a0994;
+  box-shadow: 0 2px 8px rgba(106, 13, 173, 0.05);
+}
+
+[data-theme="light"] .pp-formula-trigger-btn:hover {
+  background: #f7f2fe;
+  color: #3b0764;
+  border-color: #7c3aed;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.15);
+}
+
+[data-theme="light"] .pp-formula-info-icon {
+  color: #7c3aed;
+}
+
+/* Timeframe Pill Switcher */
+[data-theme="light"] .pp-stage-timeframe-pills {
+  background: #ffffff;
+  border: 1px solid rgba(106, 13, 173, 0.15);
+  box-shadow: 0 2px 8px rgba(106, 13, 173, 0.05);
+}
+
+[data-theme="light"] .pp-stage-timeframe-btn {
+  color: #6b5b7e;
+}
+
+[data-theme="light"] .pp-stage-timeframe-btn:hover {
+  color: #1a0033;
+}
+
+[data-theme="light"] .pp-stage-timeframe-btn.active {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  color: #ffffff;
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.35);
+}
+
+/* Scoring Rules HUD */
+[data-theme="light"] .pp-formula-hud-box {
+  background: #ffffff;
+  border: 1px solid rgba(106, 13, 173, 0.16);
+  box-shadow: 0 12px 35px rgba(106, 13, 173, 0.08);
+}
+
+[data-theme="light"] .pp-formula-hud-title {
+  color: #6b21a8;
+}
+
+[data-theme="light"] .pp-formula-hud-col.priority { border-color: #0284c7; }
+[data-theme="light"] .pp-formula-hud-col.priority .pp-formula-col-title { color: #0284c7; }
+
+[data-theme="light"] .pp-formula-hud-col.deadline { border-color: #059669; }
+[data-theme="light"] .pp-formula-hud-col.deadline .pp-formula-col-title { color: #059669; }
+
+[data-theme="light"] .pp-formula-hud-col.quality { border-color: #e11d48; }
+[data-theme="light"] .pp-formula-hud-col.quality .pp-formula-col-title { color: #e11d48; }
+
+[data-theme="light"] .pp-formula-hud-col.streak { border-color: #d97706; }
+[data-theme="light"] .pp-formula-hud-col.streak .pp-formula-col-title { color: #d97706; }
+
+[data-theme="light"] .pp-formula-col-desc {
+  color: #5c4d6d;
+}
+
+[data-theme="light"] .pp-formula-col-desc strong {
+  color: #1a0033;
+}
+
+/* Sector Tabs */
+[data-theme="light"] .pp-stage-tabs {
+  border-bottom: 1px solid rgba(106, 13, 173, 0.12);
+}
+
+[data-theme="light"] .pp-stage-tab {
+  color: #6b5b7e;
+}
+
+[data-theme="light"] .pp-stage-tab:hover {
+  color: #1a0033;
+}
+
+[data-theme="light"] .pp-stage-tab.active {
+  color: #6a0dad;
+  background: rgba(106, 13, 173, 0.08);
+}
+
+[data-theme="light"] .pp-stage-tab.active::after {
+  background: linear-gradient(90deg, #6a0dad, #9333ea);
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.4);
+}
+
+[data-theme="light"] .pp-stage-tab-badge {
+  background: rgba(106, 13, 173, 0.1);
+  color: #5a0994;
+}
+
+/* 3D Isometric Pedestals & Pillars */
+[data-theme="light"] .pp-pedestal-user-name {
+  color: #1a0033;
+  text-shadow: none;
+}
+
+[data-theme="light"] .pp-pedestal-user-role {
+  color: #6b5b7e;
+}
+
+[data-theme="light"] .pp-pedestal-crown-icon {
+  filter: drop-shadow(0 3px 8px rgba(245, 158, 11, 0.45));
+}
+
+[data-theme="light"] .rank-1 .pp-pedestal-avatar-orb {
+  border-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(217, 70, 239, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="light"] .rank-2 .pp-pedestal-avatar-orb {
+  border-color: #ffffff;
+  box-shadow: 0 8px 22px rgba(244, 63, 94, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="light"] .rank-3 .pp-pedestal-avatar-orb {
+  border-color: #ffffff;
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="light"] .rank-1 .pp-3d-pillar {
+  box-shadow: 0 20px 45px rgba(147, 51, 234, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .rank-2 .pp-3d-pillar {
+  box-shadow: 0 18px 40px rgba(244, 63, 94, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .rank-3 .pp-3d-pillar {
+  box-shadow: 0 16px 35px rgba(245, 158, 11, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* User Achievement Status Strip */
+[data-theme="light"] .pp-user-status-strip {
+  background: #ffffff;
+  border: 1px solid rgba(106, 13, 173, 0.16);
+  color: #5c4d6d;
+  box-shadow: 0 6px 25px rgba(106, 13, 173, 0.07);
+}
+
+[data-theme="light"] .pp-user-status-strip strong {
+  color: #1a0033;
+}
+
+[data-theme="light"] .pp-user-status-pill {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.28);
+}
+
+/* Rankings Table Section */
+[data-theme="light"] .pp-ranking-table-section {
+  background: #ffffff;
+  border: 1px solid rgba(106, 13, 173, 0.14);
+  box-shadow: 0 12px 35px rgba(106, 13, 173, 0.06);
+}
+
+[data-theme="light"] .pp-table-title {
+  color: #1a0033;
+}
+
+[data-theme="light"] .pp-table-cols-head {
+  color: #6b5b7e;
+  border-bottom: 1px solid rgba(106, 13, 173, 0.1);
+}
+
+[data-theme="light"] .pp-table-row {
+  background: #fbf9fe;
+  border: 1px solid rgba(106, 13, 173, 0.08);
+}
+
+[data-theme="light"] .pp-table-row:hover {
+  background: #f5edfc;
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.1);
+}
+
+[data-theme="light"] .pp-row-rank-num {
+  color: #5c4d6d;
+}
+
+[data-theme="light"] .pp-row-user-avatar {
+  background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+  border-color: #c4b5fd;
+  color: #5a0994;
+}
+
+[data-theme="light"] .pp-row-user-name {
+  color: #1a0033;
+}
+
+[data-theme="light"] .pp-row-user-role {
+  color: #7b6a8e;
+}
+
+[data-theme="light"] .pp-missions-done {
+  color: #059669;
+}
+
+[data-theme="light"] .pp-missions-active {
+  color: #0284c7;
+}
+
+[data-theme="light"] .pp-row-missions-cell {
+  color: #475569;
+}
+
+[data-theme="light"] .pp-row-revisions-cell.has-penalty {
+  color: #e11d48;
+}
+
+[data-theme="light"] .pp-row-revisions-cell.no-penalty {
+  color: #94a3b8;
+}
+
+[data-theme="light"] .pp-row-streak-cell {
+  color: #d97706;
+}
+
+[data-theme="light"] .pp-row-score-cell {
+  color: #5a0994;
+}
+
+[data-theme="light"] .pp-table-empty {
+  color: #7b6a8e;
 }

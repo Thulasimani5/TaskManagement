@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../services/api.js";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useTheme } from "../context/ThemeContext.jsx";
 import {
   FiAward,
   FiZap,
@@ -12,12 +13,15 @@ import {
   FiChevronUp,
   FiStar,
   FiTarget,
-  FiTrendingUp
+  FiTrendingUp,
+  FiSun,
+  FiMoon
 } from "react-icons/fi";
 import "../styles/leaderboard-cosmic.css";
 
 const Leaderboard = () => {
   const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [data, setData] = useState({ users: [], leads: [] });
   const [loading, setLoading] = useState(true);
   const [timeframe, setTimeframe] = useState("all-time");
@@ -103,13 +107,25 @@ const Leaderboard = () => {
         </div>
 
         <div className="pp-stage-controls">
+          {/* Quick White / Dark Theme Toggle */}
+          <button
+            className="pp-stage-theme-btn"
+            onClick={toggleTheme}
+            title={theme === "light" ? "Switch to Dark Cosmic Theme" : "Switch to White Theme"}
+            type="button"
+          >
+            {theme === "light" ? <FiMoon /> : <FiSun />}
+            <span>{theme === "light" ? "Dark Theme" : "White Theme"}</span>
+          </button>
+
           {/* Scoring Formula Toggle */}
           <button
             className="pp-formula-trigger-btn"
             onClick={() => setShowFormula(!showFormula)}
             title="View Scoring Engine Rules"
+            type="button"
           >
-            <FiInfo style={{ color: "#00f5d4" }} />
+            <FiInfo className="pp-formula-info-icon" />
             <span>Scoring Rules</span>
             {showFormula ? <FiChevronUp /> : <FiChevronDown />}
           </button>
@@ -121,6 +137,7 @@ const Leaderboard = () => {
                 key={tf}
                 className={`pp-stage-timeframe-btn ${timeframe === tf ? "active" : ""}`}
                 onClick={() => setTimeframe(tf)}
+                type="button"
               >
                 {tf.replace("-", " ")}
               </button>
@@ -132,7 +149,7 @@ const Leaderboard = () => {
       {/* Expandable Scoring Formula HUD */}
       {showFormula && (
         <div className="pp-formula-hud-box">
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#00f5d4", fontWeight: 800, fontSize: "14px", textTransform: "uppercase" }}>
+          <div className="pp-formula-hud-title">
             <FiTarget /> Multi-Factor Scoring Engine Architecture
           </div>
           <div className="pp-formula-hud-grid">
@@ -349,9 +366,9 @@ const Leaderboard = () => {
                 </div>
 
                 <div className="pp-row-missions-cell">
-                  <span style={{ color: "#10b981" }}>{player?.completedTasks || 0} done</span>
-                  <span style={{ opacity: 0.4 }}>•</span>
-                  <span style={{ color: "#00f5d4" }}>{player?.inProgressTasks || 0} active</span>
+                  <span className="pp-missions-done">{player?.completedTasks || 0} done</span>
+                  <span className="pp-missions-divider">•</span>
+                  <span className="pp-missions-active">{player?.inProgressTasks || 0} active</span>
                 </div>
 
                 <div className={`pp-row-revisions-cell ${hasPenalty ? "has-penalty" : "no-penalty"}`}>

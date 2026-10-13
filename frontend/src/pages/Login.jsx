@@ -28,9 +28,6 @@ const Login = () => {
     navigate(from, { replace: true });
   };
 
-  const handleDemoFill = (email, password) => {
-    setForm({ email, password });
-  };
 
   return (
     <div className="pp-auth-page">
@@ -86,37 +83,6 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="pp-demo-badge-container">
-          <div className="pp-demo-badge-label">
-            Quick Demo Accounts (Click to Autofill)
-          </div>
-          <div className="pp-demo-badge-list">
-            <button
-              type="button"
-              className="pp-demo-chip"
-              onClick={() => handleDemoFill("admin@purplepulse.dev", "Admin@123")}
-            >
-              <span className="pp-demo-chip-icon">👑</span>
-              <span className="pp-demo-chip-name">Admin</span>
-            </button>
-            <button
-              type="button"
-              className="pp-demo-chip"
-              onClick={() => handleDemoFill("lead@purplepulse.dev", "Lead@123")}
-            >
-              <span className="pp-demo-chip-icon">⚡</span>
-              <span className="pp-demo-chip-name">Team Lead</span>
-            </button>
-            <button
-              type="button"
-              className="pp-demo-chip"
-              onClick={() => handleDemoFill("user@purplepulse.dev", "User@123")}
-            >
-              <span className="pp-demo-chip-icon">👤</span>
-              <span className="pp-demo-chip-name">Member</span>
-            </button>
-          </div>
-        </div>
 
         <p className="pp-auth-footer">
           New to PurplePulse? <Link to="/register">Create an account</Link>
