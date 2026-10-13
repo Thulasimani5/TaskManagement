@@ -2,7 +2,7 @@
 
 > A futuristic, full-stack digital task monitoring and gamified workflow optimization ecosystem governed by strict Role-Based Access Control (RBAC), multi-tier review pipelines, and an esports-style 3D leaderboard scoring engine.
 
-[Live Demo](https://purplepulse.dev) · [GitHub](https://github.com/Thulasimani5/PurplePulse) · [API Docs](#api-documentation)
+[Live Demo](https://task-management-front-ebon.vercel.app) · [GitHub](https://github.com/Thulasimani5/PurplePulse) · [API Docs](#api-documentation)
 
 ---
 
@@ -404,4 +404,4 @@ Third-party components, if any, remain subject to their respective licenses.
 
 **Thulasimani**
 
-[LinkedIn](https://linkedin.com) · [GitHub](https://github.com/Thulasimani5) · [Portfolio](https://thulasimani.dev) · [Email](mailto:thulasimanid.cb23@bitsathy.ac.in)
+[LinkedIn](https://linkedin.com) · [GitHub](https://github.com/Thulasimani5) · [Portfolio]() · [Email](mailto:thulasimanid.cb23@bitsathy.ac.in)
