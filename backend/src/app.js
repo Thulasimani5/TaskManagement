@@ -19,28 +19,40 @@ const createApp = () => {
   app.use(express.urlencoded({ extended: true }));
 
   // ── CORS
-  // Allow CLIENT_ORIGIN env var (set this in Render dashboard to your frontend URL).
-  // Falls back to allowing all origins in development.
-  const allowedOrigins = [
+  // CLIENT_ORIGIN accepts a comma-separated list, e.g.:
+  //   https://task-management-pi-three-24.vercel.app,https://my-custom-domain.com
+  // Set this in the Vercel dashboard → Settings → Environment Variables.
+  const rawOrigins = [
     "http://localhost:5173",
     "http://localhost:5174",
-    process.env.CLIENT_ORIGIN
+    ...(process.env.CLIENT_ORIGIN
+      ? process.env.CLIENT_ORIGIN.split(",").map((o) => o.trim())
+      : [])
   ].filter(Boolean);
 
   app.use(cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (mobile apps, curl, Postman, server-to-server)
+      // Allow requests with no origin (curl, Postman, server-to-server)
       if (!origin) return callback(null, true);
-      // In production, check against allowedOrigins
-      if (process.env.NODE_ENV === "production") {
-        if (allowedOrigins.includes(origin)) return callback(null, true);
-        return callback(new Error(`CORS: origin '${origin}' not allowed`));
-      }
+
+      // Explicit whitelist check
+      if (rawOrigins.includes(origin)) return callback(null, true);
+
+      // Allow any *.vercel.app origin (covers preview deployments)
+      if (origin.endsWith(".vercel.app")) return callback(null, true);
+
       // In development, allow everything
-      return callback(null, true);
+      if (process.env.NODE_ENV !== "production") return callback(null, true);
+
+      return callback(new Error(`CORS: origin '${origin}' not allowed`));
     },
-    credentials: true
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   }));
+
+  // Handle preflight OPTIONS requests for all routes
+  app.options("*", cors());
 
   // ── Request logging (dev only)
   if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
