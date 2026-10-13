@@ -1,4 +1,5 @@
 // All database calls related to report aggregations.
+import mongoose from "mongoose";
 import { Task } from "../tasks/task.model.js";
 
 /** Build a faceted aggregation pipeline for task statistics */
@@ -6,10 +7,12 @@ const buildReportPipeline = (since, userId) => {
   const matchStage = {
     $or: [
       { updatedAt: { $gte: since } },
-      { status: { $ne: "completed" } }
+      { status: { $nin: ["completed", "finished"] } }
     ]
   };
-  if (userId) matchStage.assignedTo = userId;
+  if (userId) {
+    matchStage.assignedTo = new mongoose.Types.ObjectId(String(userId));
+  }
 
   return [
     { $match: matchStage },

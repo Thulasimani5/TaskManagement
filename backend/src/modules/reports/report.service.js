@@ -5,13 +5,13 @@ const processAggregationResult = (result) => {
   const data  = result[0];
   const total = data.total[0] ? data.total[0].count : 0;
 
-  const byStatus = { todo: 0, in_progress: 0, completed: 0 };
+  const byStatus = { todo: 0, in_progress: 0, in_review: 0, completed: 0, finished: 0 };
   data.byStatus.forEach((item) => { byStatus[item._id] = item.count; });
 
   const byPriority = { low: 0, medium: 0, high: 0, critical: 0 };
   data.byPriority.forEach((item) => { byPriority[item._id] = item.count; });
 
-  const completed      = byStatus.completed || 0;
+  const completed      = (byStatus.completed || 0) + (byStatus.finished || 0);
   const completionRate = total ? Math.round((completed / total) * 100) : 0;
 
   return { total, completed, completionRate, byStatus, byPriority };

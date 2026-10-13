@@ -34,6 +34,16 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
+          to="/reviews"
+          className={({ isActive }) =>
+            `pp-nav-link ${isActive ? "active" : ""}`
+          }
+        >
+          <span className="pp-nav-dot" />
+          Reviews &amp; Approvals
+        </NavLink>
+
+        <NavLink
           to="/leaderboard"
           className={({ isActive }) =>
             `pp-nav-link ${isActive ? "active" : ""}`
@@ -41,17 +51,6 @@ const Sidebar = () => {
         >
           <span className="pp-nav-dot" />
           Leaderboard
-        </NavLink>
-
-
-        <NavLink
-          to="/reports"
-          className={({ isActive }) =>
-            `pp-nav-link ${isActive ? "active" : ""}`
-          }
-        >
-          <span className="pp-nav-dot" />
-          Progress Pulse &amp; Deadline Radar
         </NavLink>
 
         {user && (user.role === "admin" || user.role === "lead") && (

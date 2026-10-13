@@ -6,16 +6,21 @@ export const findTasks = (filter) =>
   Task.find(filter)
     .populate("assignedTo", "name email role")
     .populate("createdBy",  "name email role")
+    .populate("reviewedBy", "name email role")
+    .populate("reviewHistory.reviewedBy", "name email role")
     .sort({ deadline: 1 });
 
 export const findTaskById = (id) =>
   Task.findById(id)
     .populate("assignedTo", "name email role")
-    .populate("createdBy",  "name email role");
+    .populate("createdBy",  "name email role")
+    .populate("reviewedBy", "name email role")
+    .populate("reviewHistory.reviewedBy", "name email role");
 
 export const insertTask = async (data) => {
   const task = await Task.create(data);
-  await task.populate("assignedTo", "name email");
+  await task.populate("assignedTo", "name email role");
+  await task.populate("createdBy", "name email role");
   return task;
 };
 

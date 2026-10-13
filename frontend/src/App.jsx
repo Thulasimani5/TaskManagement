@@ -9,8 +9,7 @@ import TaskBoard from "./pages/TaskBoard.jsx";
 import Reports from "./pages/Reports.jsx";
 import TeamDirectory from "./pages/TeamDirectory.jsx";
 import Leaderboard from "./pages/Leaderboard.jsx";
-
-
+import TaskReviews from "./pages/TaskReviews.jsx";
 
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -42,12 +41,10 @@ const App = () => {
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tasks" element={<TaskBoard />} />
+            <Route path="/reviews" element={<TaskReviews />} />
             <Route path="/team" element={<TeamDirectory />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-
-
-
-            <Route path="/reports" element={<Reports />} />
+            <Route path="/reports" element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Route>
 
