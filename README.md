@@ -1,8 +1,10 @@
 # PurplePulse
 
+![PurplePulse Banner](./docs/banner.png)
+
 > A futuristic, full-stack digital task monitoring and gamified workflow optimization ecosystem governed by strict Role-Based Access Control (RBAC), multi-tier review pipelines, and an esports-style 3D leaderboard scoring engine.
 
-[Live Demo](https://task-management-front-ebon.vercel.app) · [GitHub](https://github.com/Thulasimani5/PurplePulse) · [API Docs](#api-documentation)
+[Live Demo](https://task-management-front-ebon.vercel.app) · [GitHub](https://github.com/Thulasimani5/TaskManagement) · [API Docs](#api-documentation)
 
 ---
 
@@ -40,9 +42,9 @@ Traditional task management approaches suffer from fragmented communication, opa
 
 ## Screenshots / Demo
 
-```
-
-```
+| Personal Mission Cockpit | 3D Gamified Leaderboard |
+|---|---|
+| ![Personal Dashboard Cockpit](./docs/screenshots/dashboard.png) | ![3D Isometric Podium Leaderboard](./docs/screenshots/leaderboard.png) |
 
 ---
 
@@ -71,8 +73,8 @@ Traditional task management approaches suffer from fragmented communication, opa
 - **Encryption**: Bcrypt password hashing with cryptographic salt rounds
 
 ### Deployment:
-- **Frontend**: Vercel / Render Static Site
-- **Backend**: Render Web Service / Vercel Serverless Functions
+- **Frontend**: Vercel ([https://task-management-front-ebon.vercel.app](https://task-management-front-ebon.vercel.app))
+- **Backend**: Vercel Serverless Functions ([https://task-management-bac.vercel.app](https://task-management-bac.vercel.app))
 
 ### Tools:
 - Git, GitHub, Postman, Vite Dev Server, Nodemon
@@ -184,7 +186,7 @@ flowchart TB
 ## Project Structure
 
 ```text
-task_management/
+TaskManagement/
 ├── backend/
 │   ├── src/
 │   │   ├── config/
@@ -204,11 +206,10 @@ task_management/
 │   │   └── index.js                  # Serverless entry point
 │   ├── index.js                      # Local development server entry
 │   └── package.json
-│
 ├── frontend/
 │   ├── src/
 │   │   ├── components/               # Header, Sidebar, ProtectedRoute, Shared UI
-│   │   ├── context/                  # AuthContext state management
+│   │   ├── context/                  # AuthContext, ThemeContext state management
 │   │   ├── pages/
 │   │   │   ├── Dashboard.jsx         # User-specific analytics & progress pulse
 │   │   │   ├── TaskBoard.jsx         # Kanban workflow & self-assignment engine
@@ -223,8 +224,8 @@ task_management/
 │   ├── index.html
 │   ├── vite.config.js
 │   └── package.json
-│
-├── .gitignore                        # Consolidated repository gitignore
+├── docs/                             # Project banner and screenshots
+├── .gitignore
 └── README.md
 ```
 
@@ -242,8 +243,8 @@ task_management/
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/Thulasimani5/PurplePulse.git
-cd PurplePulse/task_management
+git clone https://github.com/Thulasimani5/TaskManagement.git
+cd TaskManagement
 ```
 
 ### 2. Install backend dependencies:
@@ -267,13 +268,13 @@ npm install
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/taskmanagement?retryWrites=true&w=majority
 JWT_SECRET=your_super_secret_jwt_key_here
-CLIENT_ORIGIN=http://localhost:5173,https://purplepulse.vercel.app
+CLIENT_ORIGIN=http://localhost:5173
 NODE_ENV=development
 ```
 
 ### Frontend Configuration (`frontend/.env`):
 ```env
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=/api
 ```
 
 ---
@@ -316,39 +317,6 @@ npm run dev
 
 ---
 
-## Testing
-
-```bash
-cd backend
-npm test
-```
-
-- **Test coverage**: Functional endpoint verification with Postman collection and end-to-end browser subagent suites.
-- **Important test cases**:
-  - Verification of self-assigned tasks skipping the `in_review` bottleneck.
-  - Role validation preventing regular users from approving tasks or creating global assignments.
-  - Mathematical assertion of revision penalties deducting exactly 10 points per request.
-  - Streak computation resetting upon overdue delivery.
-
----
-
-## Deployment
-
-- **Frontend**: Deployed on [Vercel](https://purplepulse.vercel.app)
-- **Backend**: Hosted on [Render](https://purplepulse-api.onrender.com)
-- **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) (Multi-region cloud replica set)
-
----
-
-## Performance
-
-- **Average API Response Time**: `~45ms` on local and `~120ms` over serverless cloud connections.
-- **Concurrent Requests Handled**: `100+ req/sec` through non-blocking asynchronous event loop handling.
-- **Database Optimization**: Indexed keys on `assignedTo`, `status`, `deadline`, and `updatedAt` for $O(\log n)$ query lookups.
-- **Optimized Frontend Assets**: Production build chunk splitting with gzip compression (`~198 kB` JS bundle).
-
----
-
 ## Security
 
 - **JSON Web Tokens (JWT)**: Cryptographically signed bearer tokens with session expiry.
@@ -371,7 +339,6 @@ npm test
 - **Problem**: When users create tasks for themselves, requiring a mentor review creates unnecessary operational delays. Conversely, assigned tasks require strict mentor sign-off.
 - **Solution**: Implemented an automated status transition engine: self-assigned tasks detect identity match (`assignedTo === createdBy`) and move directly to `completed`. Delegated tasks must undergo mentor review with feedback logging before certification.
 
-
 ---
 
 ## Future Enhancements
@@ -384,19 +351,15 @@ npm test
 
 ## License
 
-```text
-Copyright (c) 2026 [ PurplePulse ]. All rights reserved.
+MIT License.
 
-This source code is made available for viewing and inspection purposes only.
+Copyright (c) 2026 Thulasimani
 
-No permission is granted to use, copy, modify, distribute, sublicense, or commercially exploit this software without prior written permission from the copyright holder.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Access to this repository does not grant any rights to the software beyond viewing its source code.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-Unauthorized use, reproduction, or distribution of this software is prohibited.
-
-Third-party components, if any, remain subject to their respective licenses.
-```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ---
 
@@ -404,4 +367,4 @@ Third-party components, if any, remain subject to their respective licenses.
 
 **Thulasimani**
 
-[LinkedIn](https://linkedin.com) · [GitHub](https://github.com/Thulasimani5) · [Portfolio]() · [Email](mailto:thulasimanid.cb23@bitsathy.ac.in)
+[GitHub](https://github.com/Thulasimani5) · [LinkedIn](https://www.linkedin.com/in/thulasimani-d-3a55382b4/) · [Email](mailto:thulasimanid.cb23@bitsathy.ac.in)
